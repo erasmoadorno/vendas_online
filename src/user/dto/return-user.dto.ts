@@ -8,7 +8,7 @@ export class ReturnUserDto {
   // email: string;
   // phone: string;
   // cpf: string;
-  addresses: ReturnAddressDto[];
+  userAddress: ReturnAddressDto[];
 
   constructor(userEntity: UserEntity) {
     //No constructor tinha colocado readonly, ao testar o endpoint de get all users, retornava todos os dados inclusive senhas e alguma outra informação sensível, então sem readonly só retorna esses 5 dados
@@ -17,6 +17,6 @@ export class ReturnUserDto {
     // this.email = userEntity.email;
     // this.phone = userEntity.phone;
     // this.cpf = userEntity.cpf;
-    this.addresses = userEntity.userAddresses ? userEntity.userAddresses.map((address) => new ReturnAddressDto(address)) : undefined
+    this.userAddress = userEntity.userAddresses ? userEntity.userAddresses.map((address) => new ReturnAddressDto(address)) : undefined
   }
 }
