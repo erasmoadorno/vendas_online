@@ -11,14 +11,14 @@ import {
 
 @Entity({ name: 'City' })
 export class CityEntity {
-  @PrimaryGeneratedColumn('identity')
-  idCity: number;
+  @PrimaryGeneratedColumn('uuid')
+  idCity: string;
   @Column({ name: 'name', nullable: false })
   name: string;
   @Column({ name: 'state', nullable: false })
   state: number;
   @OneToMany(() => AddressEntity, (address) => address.cityEnt)
-  cityAddresses?: AddressEntity;
+  cityAddresses?: AddressEntity[];
   @ManyToOne(() => StateEntity, (state) => state.cities)
   @JoinColumn({ name: 'state', referencedColumnName: 'idstate' })
   cityEnt?: StateEntity;

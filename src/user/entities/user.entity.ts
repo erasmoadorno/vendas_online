@@ -15,6 +15,6 @@ export class UserEntity {
   cpf: string;
   @Column({ name: 'phone', nullable: true })
   phone: string;
-  @OneToMany(() => AddressEntity, (address) => address.user)
+  @OneToMany(() => AddressEntity, (address) => address.userEnt)
   userAddresses?: AddressEntity[];
 }

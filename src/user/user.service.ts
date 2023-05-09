@@ -34,11 +34,11 @@ export class UserService {
   }
 
   async findUserWithRelations(id: string): Promise<UserEntity> {
-    const teste = await this.userRepository.findOne({
+    return await this.userRepository.findOne({
       where: { iduser: id },
-      relations: ['userAddresses'],
+      relations: {
+        userAddresses: true,
+      },
     });
-    console.log(teste);
-    return teste;
   }
 }

@@ -13,7 +13,7 @@ export class StateService {
     return this.stateRepository.find();
   }
 
-  findById(id: number) {
+  findById(id: string) {
     return this.stateRepository.find({ where: { idstate: id } });
   }
 }

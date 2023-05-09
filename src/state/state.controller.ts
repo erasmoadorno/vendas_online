@@ -13,6 +13,6 @@ export class StateController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.stateService.findById(+id);
+    return this.stateService.findById(id);
   }
 }

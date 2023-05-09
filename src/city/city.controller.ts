@@ -30,4 +30,9 @@ export class CityController {
   findOne(@Param('id') id: string) {
     return this.cityService.getCitiesByState(+id);
   }
+
+  @Get('citybyid/:id')
+  findById(@Param('id') id: string) {
+    return this.cityService.findCityByid(id);
+  }
 }

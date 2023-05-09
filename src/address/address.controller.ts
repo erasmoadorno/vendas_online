@@ -37,6 +37,11 @@ export class AddressController {
     return this.addressService.findOne(id);
   }
 
+  @Get('user/:id')
+  findAddressByUserId(@Param('id') id: string) {
+    return this.addressService.findAddressByUserId(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
     return this.addressService.update(+id, updateAddressDto);

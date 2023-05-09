@@ -16,7 +16,7 @@ export class AddressService {
     private readonly userService: UserService,
   ) {}
   async create(user: string, createAddressDto: CreateAddressDto) {
-    await this.cityService.findCityByid(createAddressDto.city);
+    await this.cityService.findCityByid('' + createAddressDto.city);
     await this.userService.findOne(user);
     return await this.addressRepository.save({
       ...createAddressDto,
@@ -24,12 +24,16 @@ export class AddressService {
     });
   }
 
-  findAll() {
-    return `This action returns all address`;
+  async findAll() {
+    return await this.addressRepository.find();
   }
 
-  findOne(id: string) {
-    return this.addressRepository.findOne({ where: { idaddress: id } });
+  async findOne(id: string) {
+    return await this.addressRepository.findOne({ where: { idaddress: id } });
+  }
+
+  async findAddressByUserId(id: string) {
+    return await this.addressRepository.find({ where: { user: id } });
   }
 
   update(id: number, updateAddressDto: UpdateAddressDto) {

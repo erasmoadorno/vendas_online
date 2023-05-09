@@ -29,7 +29,7 @@ export class CityService {
 
     return cities;
   }
-  async findCityByid(id: number) {
+  async findCityByid(id: string) {
     const city = await this.cityRepository.findOne({ where: { idCity: id } });
     if (!city) {
       throw new NotFoundException(`City id: ${id} not founded.`);
