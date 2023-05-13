@@ -9,6 +9,6 @@ export class StateEntity {
   name: string;
   @Column({ name: 'uf', nullable: false })
   uf: string;
-  @OneToMany(() => CityEntity, (city) => city.cityEnt)
+  @OneToMany(() => CityEntity, (city) => city.stateEnt)
   cities?: CityEntity[];
 }

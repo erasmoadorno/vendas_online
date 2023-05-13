@@ -16,10 +16,10 @@ export class CityEntity {
   @Column({ name: 'name', nullable: false })
   name: string;
   @Column({ name: 'state', nullable: false })
-  state: number;
+  state: string;
   @OneToMany(() => AddressEntity, (address) => address.cityEnt)
   cityAddresses?: AddressEntity[];
   @ManyToOne(() => StateEntity, (state) => state.cities)
   @JoinColumn({ name: 'state', referencedColumnName: 'idstate' })
-  cityEnt?: StateEntity;
+  stateEnt?: StateEntity;
 }

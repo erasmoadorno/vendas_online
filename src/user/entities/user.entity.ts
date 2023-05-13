@@ -13,6 +13,8 @@ export class UserEntity {
   password: string;
   @Column({ name: 'cpf', nullable: false })
   cpf: string;
+  @Column({ name: 'typeuser', nullable: false })
+  typeuser: number;
   @Column({ name: 'phone', nullable: true })
   phone: string;
   @OneToMany(() => AddressEntity, (address) => address.userEnt)
