@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
@@ -12,6 +16,14 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
   async create(createUserDto: CreateUserDto) {
+    const user = await this.findUserByEmail(createUserDto.email).catch(
+      () => undefined,
+    );
+
+    if (user) {
+      throw new NotAcceptableException('Email already exist.');
+    }
+
     const salt = 12;
     const hashedPass = await hash(createUserDto.password, salt);
     return this.userRepository.save({
