@@ -1,13 +1,13 @@
 import { IsString, IsOptional, IsInt } from 'class-validator';
 
 export class CreateAddressDto {
-  readonly idaddress: string;
+  @IsOptional()
   @IsString()
-  readonly complement: string;
+  complement: string;
   @IsInt()
-  readonly number: number;
+  number: number;
   @IsString()
-  readonly cep: string;
+  cep: string;
   @IsInt()
-  readonly city: number;
+  city: string;
 }

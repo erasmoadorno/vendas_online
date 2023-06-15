@@ -12,6 +12,10 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles/roles.guard';
+import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
+import { CartModule } from './cart/cart.module';
+import { CartProductModule } from './cart-product/cart-product.module';
 
 @Module({
   imports: [
@@ -35,6 +39,10 @@ import { RolesGuard } from './guards/roles/roles.guard';
     AddressModule,
     AuthModule,
     JwtModule,
+    CategoryModule,
+    ProductModule,
+    CartModule,
+    CartProductModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: RolesGuard }],

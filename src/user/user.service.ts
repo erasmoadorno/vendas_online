@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotAcceptableException,
   NotFoundException,
@@ -7,7 +8,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { hash } from 'bcrypt';
+import { TypeUser } from './enum/type-user.enum';
+import { createHashedPassword, verifyHashedPassword } from '../utils/password';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Injectable()
 export class UserService {
@@ -15,7 +18,8 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
   ) {}
-  async create(createUserDto: CreateUserDto) {
+
+  async create(createUserDto: CreateUserDto): Promise<UserEntity> {
     const user = await this.findUserByEmail(createUserDto.email).catch(
       () => undefined,
     );
@@ -24,11 +28,11 @@ export class UserService {
       throw new NotAcceptableException('Email already exist.');
     }
 
-    const salt = 12;
-    const hashedPass = await hash(createUserDto.password, salt);
+    const hashedPass = await createHashedPassword(createUserDto.password);
     return this.userRepository.save({
       ...createUserDto,
       password: hashedPass,
+      typeuser: TypeUser.User,
     });
   }
 
@@ -60,5 +64,31 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async changePassword(
+    id: string,
+    updatePasswordDto: UpdatePasswordDto,
+  ): Promise<UserEntity> {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const verifyPassword = await verifyHashedPassword(
+      updatePasswordDto.currentPassword,
+      user?.password || '',
+    );
+
+    if (!verifyPassword) {
+      throw new BadRequestException('Password invalid');
+    }
+
+    const newHashedPassword = await createHashedPassword(
+      updatePasswordDto.newPassword,
+    );
+
+    return this.userRepository.save({ ...user, password: newHashedPassword });
   }
 }

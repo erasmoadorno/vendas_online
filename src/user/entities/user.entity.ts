@@ -1,4 +1,4 @@
-import { AddressEntity } from 'src/address/entities/address.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity({ name: 'user' })

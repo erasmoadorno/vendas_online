@@ -1,4 +1,4 @@
-import { IsInt, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateUserDto {
   readonly idUser: string;
@@ -12,6 +12,4 @@ export class CreateUserDto {
   readonly cpf: string;
   @IsString()
   readonly phone: string;
-  @IsInt()
-  readonly typeuser: number;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ReturnUserDto } from 'src/user/dto/return-user.dto';
+import { ReturnUserDto } from '../../user/dto/return-user.dto';
 
 export interface ReturnLogin {
   user: ReturnUserDto;

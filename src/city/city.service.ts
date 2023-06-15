@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CacheService } from 'src/cache/cache.service';
+import { CacheService } from '../cache/cache.service';
 // import { CreateCityDto } from './dto/create-city.dto';
 // import { UpdateCityDto } from './dto/update-city.dto';
 import { Repository } from 'typeorm';

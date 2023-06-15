@@ -1,5 +1,5 @@
 export class CreateCityDto {
-  readonly idCity: number;
-  readonly name: string;
-  readonly state: number;
+  idCity: string;
+  name: string;
+  state: number;
 }
